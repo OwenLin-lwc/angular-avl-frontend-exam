@@ -1,5 +1,9 @@
 import { PeriodicElement } from '../interfaces/interfaces';
 
+export const TIME_LIST: string[] = [
+  '00:00','01:00','02:00','03:00','04:00','05:00','06:00','07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','21:00','22:00','23:00',
+]
+
 export const NAME_LIST: string[] = ['足立壽司','鮨隆','匠壽司','游壽司','同壽司','童壽司','牡丹 天ぷら','凜割烹','鮨野村','笹鮨','鮨天本','鮨七海','Ukai 鐵板燒','肉割烹','よる','和牛47','謙安和','凜割烹','匠樂','鮨十兵衛','吟翔懷石料理','初魚料亭','吉兆割烹壽司','野壽司','一宗壽司','鮨蕙','小粋鮨割烹','粋鮨','錵鑶日本料理','筌壽司割烹','平淡天真','新都里懷石料理','彧割烹','極壽司','允壽司','牛壽司','上引水產','三井料理美術館','森壽司','高玉日本料理','丸壽司','綠水棧','牛二壽司','子元日本料理','逸鮮棧','旬採鮨処','鯈樂','鯤壽司','初魚料亭','煮海','德壽司'];
 
 export const ELEMENT_DATA: PeriodicElement[] = [
@@ -54,5 +58,4 @@ export const ELEMENT_DATA: PeriodicElement[] = [
   { Name: '初魚料亭', Sunday: '08:00-22:30', Monday: '08:00-22:30', Tuesday: '08:00-22:30', Wednesday: '08:00-22:30', Thursday: '08:00-22:30', Friday: '08:00-22:30', Saturday: '08:00-22:30', Type: '海鮮店', Star: ' 無', Parking: '有', Delivery: '無', PayAdvance: '是', Ranking: '2.34', Location: 'POINT (113.509321162 22.2231168835)' },
   { Name: '煮海', Sunday: '16:30-22:30', Monday: '11:00-22:30', Tuesday: '11:00-22:30', Wednesday: '11:00-22:30', Thursday: '11:00-22:30', Friday: '11:00-23:00', Saturday: '11:30-23:00', Type: '海鮮店', Star: ' 無', Parking: '有', Delivery: '無', PayAdvance: '否', Ranking: '4.55', Location: 'POINT (-63.0597285144 18.0888861095)' },
   { Name: '德壽司', Sunday: '05:30-02:00', Monday: '05:30-02:00', Tuesday: '05:30-02:00', Wednesday: '05:30-02:00', Thursday: '05:30-02:00', Friday: '05:30-02:00', Saturday: '05:30-02:00', Type: '無菜單', Star: ' 無', Parking: '有', Delivery: '無', PayAdvance: '是', Ranking: '4.86', Location: 'POINT (-8.45615794798 29.8376295469)' },
-  { Name: '', Sunday: '', Monday: '', Tuesday: '', Wednesday: '', Thursday: '', Friday: '', Saturday: '', Type: '', Star: '', Parking: '', Delivery: '', PayAdvance: '', Ranking: '', Location: '' },
 ]

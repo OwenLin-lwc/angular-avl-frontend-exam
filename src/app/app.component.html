@@ -1,5 +1,6 @@
 <form class="example-form">
-  <mat-form-field class="example-full-width">
+	<mat-label class="example-full-width">現在時間 {{currentTime | date: 'yyyy-MM-dd HH:mm EEEE z'}}</mat-label>
+	<!-- <mat-form-field class="example-full-width">
     <mat-label>餐廳名字</mat-label>
     <input matInput placeholder="餐廳名字" [formControl]="myControl" [matAutocomplete]="auto">
     <mat-autocomplete #auto="matAutocomplete">
@@ -16,71 +17,80 @@
         {{p}}
       </mat-option>
     </mat-select>
-  </mat-form-field>
+  </mat-form-field> -->
+
+	<mat-form-field class="example-full-width">
+		<mat-label>訂位日期</mat-label>
+		<input matInput [matDatepicker]="picker" placeholder="Choose a date" (dateChange)="dateChange('change', $event)" [value]="searchDate.value">
+		<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+		<mat-datepicker #picker></mat-datepicker>
+	</mat-form-field>
 
   <mat-form-field>
-      <mat-label>訂位日期</mat-label>
-      <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
+    <mat-label>訂位時間</mat-label>
+    <mat-select [(value)]="searchTime" (selectionChange)="timeChange($event)">
+      <mat-option *ngFor="let t of timeRange" [value]="t">
+        {{t}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 </form>
 
 <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
-  <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
-    <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-    <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
-  </ng-container>
+	<ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+		<th mat-header-cell *matHeaderCellDef> {{column}} </th>
+		<td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+	</ng-container>
 
-  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-  <ng-container matColumnDef="expandedDetail">
-    <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
-      <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-        <table>
-          <thead>
-            <tr>
-              <th></th>
-              <th>類型</th>
-              <th>米其林星</th>
-              <th>停車</th>
-              <th>外送</th>
-              <th>先繳訂金</th>
-              <th>評價</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><button mat-raised-button color="primary">訂位</button></td>
-              <div matTooltip="{{element.Type}}">
-                <mat-icon *ngIf="element.Type === '無菜單'">deck</mat-icon>
-                <mat-icon *ngIf="element.Type === '傳統'">cake</mat-icon>
-                <mat-icon *ngIf="element.Type === '甜不辣'">fireplace</mat-icon>
-                <mat-icon *ngIf="element.Type === '丼飯'">mood</mat-icon>
-                <mat-icon *ngIf="element.Type === '鐵板燒'">group</mat-icon>
-                <mat-icon *ngIf="element.Type === '割烹'">poll</mat-icon>
-                <mat-icon *ngIf="element.Type === '新創'">public</mat-icon>
-                <mat-icon *ngIf="element.Type === '和牛'">sports</mat-icon>
-                <mat-icon *ngIf="element.Type === '懷石料理'">notifications</mat-icon>
-                <mat-icon *ngIf="element.Type === '壽司'">outdoor_grill</mat-icon>
-                <mat-icon *ngIf="element.Type === '海鮮店'">whatshot</mat-icon>
+	<!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+	<ng-container matColumnDef="expandedDetail">
+		<td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+			<div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+				<table>
+					<thead>
+						<tr>
+							<th></th>
+							<th>類型</th>
+							<th>米其林星</th>
+							<th>停車</th>
+							<th>外送</th>
+							<th>先繳訂金</th>
+							<th>評價</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><button mat-raised-button color="primary">訂位</button></td>
+							<div matTooltip="{{element.Type}}">
+								<mat-icon *ngIf="element.Type === '無菜單'">deck</mat-icon>
+								<mat-icon *ngIf="element.Type === '傳統'">cake</mat-icon>
+								<mat-icon *ngIf="element.Type === '甜不辣'">fireplace</mat-icon>
+								<mat-icon *ngIf="element.Type === '丼飯'">mood</mat-icon>
+								<mat-icon *ngIf="element.Type === '鐵板燒'">group</mat-icon>
+								<mat-icon *ngIf="element.Type === '割烹'">poll</mat-icon>
+								<mat-icon *ngIf="element.Type === '新創'">public</mat-icon>
+								<mat-icon *ngIf="element.Type === '和牛'">sports</mat-icon>
+								<mat-icon *ngIf="element.Type === '懷石料理'">notifications</mat-icon>
+								<mat-icon *ngIf="element.Type === '壽司'">outdoor_grill</mat-icon>
+								<mat-icon *ngIf="element.Type === '海鮮店'">whatshot</mat-icon>
 
-              </div>
-              <td>{{element.Star}}</td>
-              <td>{{element.Parking}}</td>
-              <td>{{element.Delivery}}</td>
-              <td>{{element.PayAdvance}}</td>
-              <td>{{element.Ranking}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </td>
-  </ng-container>
+							</div>
+							<td>{{element.Star}}</td>
+							<td>{{element.Parking}}</td>
+							<td>{{element.Delivery}}</td>
+							<td>{{element.PayAdvance}}</td>
+							<td>{{element.Ranking}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</td>
+	</ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-  <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"
-    [class.example-expanded-row]="expandedElement === element"
-    (click)="expandedElement = expandedElement === element ? null : element">
-  </tr>
-  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+	<tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+	<tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"
+		[class.example-expanded-row]="expandedElement === element"
+		(click)="expandedElement = expandedElement === element ? null : element">
+	</tr>
+	<tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
 </table>
